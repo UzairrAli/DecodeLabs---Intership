@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kinfolk Eats - An Interactive Digital Compendium for Pakistani Family Heritage Recipes">
+    <meta name="theme-color" content="#A5856F">
+    <title>Kinfolk Eats – Pakistani Heritage Recipes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+    <!-- ===== HEADER & NAVIGATION ===== -->
+    <header role="banner" class="site-header" id="siteHeader">
+        <nav role="navigation" class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <span class="logo-text">Kinfolk Eats</span>
+                </h1>
+                <button aria-label="Toggle navigation menu" class="nav-toggle" id="navToggle">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#recipes" class="nav-link">Recipes</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero" aria-label="Hero section">
+            <div class="hero-content">
+                <span class="hero-badge">🇵🇰 Pakistani Heritage</span>
+                <h2 class="hero-title">Desi Heritage in Every Taste</h2>
+                <p class="hero-subtitle">Discover the authentic flavors, rich traditions, and culinary stories of Pakistani cuisine. Recipes passed down through generations of families.</p>
+                <div class="hero-actions">
+                    <a href="#recipes" class="cta-button">Explore Recipes</a>
+                    <a href="#about" class="cta-secondary">Our Story</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-number">6+</span><span class="stat-label">Heritage Recipes</span></div>
+                    <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Authentic</span></div>
+                    <div class="stat"><span class="stat-number">🇵🇰</span><span class="stat-label">Pakistani</span></div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-frame">
+                    <img 
+                        src="https://picsum.photos/seed/biryani/600/500" 
+                        alt="Delicious Pakistani Food"
+                        class="hero-img"
+                        onerror="this.style.display='none'; this.parentNode.classList.add('hero-img-fallback');"
+                    >
+                    <div class="hero-img-badge">✨ Family Recipes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== RECIPE FEED SECTION ===== -->
+        <section id="recipes" class="recipes-section" aria-label="Recipe collection">
+            <div class="section-header">
+                <span class="section-badge">Our Collection</span>
+                <h2 class="section-title">Pakistani Heritage Recipes</h2>
+                <p class="section-description">Time-honored recipes celebrating Pakistan's culinary heritage — from coastal delicacies to mountain traditions</p>
+            </div>
+
+            <div class="filter-controls">
+                <label for="categoryFilter" class="filter-label">Filter by Category:</label>
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="appetizers">Appetizers</option>
+                    <option value="mains">Main Courses</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="soups">Soups & Stews</option>
+                </select>
+            </div>
+
+            <div class="recipe-grid" id="recipeGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- ===== RECIPE DETAIL MODAL ===== -->
+    <section class="recipe-detail-section" id="recipeDetailSection" aria-label="Recipe details" hidden>
+        <button class="close-button" id="closeButton" aria-label="Close recipe detail">✕</button>
+        <article class="recipe-detail-container">
+            <div class="recipe-detail-hero" id="recipeDetailHero">
+                <img id="recipeDetailImg" src="" alt="" class="recipe-detail-img" onerror="this.style.display='none';">
+                <div class="recipe-detail-overlay">
+                    <div class="recipe-meta">
+                        <h2 class="recipe-title" id="recipeTitle"></h2>
+                        <div class="recipe-tags">
+                            <span id="recipeOrigin" class="tag origin-tag"></span>
+                            <span id="recipeCategory" class="tag category-tag"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-detail-body">
+                <!-- Ingredients -->
+                <section class="recipe-section ingredients-section" aria-label="Recipe ingredients">
+                    <h3 class="recipe-section-title">🧂 Ingredients</h3>
+                    <div class="serving-control">
+                        <label for="servingsInput" class="serving-label">Servings:</label>
+                        <div class="serving-input-group">
+                            <button class="serving-button" id="servingsMinus" aria-label="Decrease servings">−</button>
+                            <input type="number" id="servingsInput" class="serving-input" min="1" max="12" value="4" aria-label="Servings amount">
+                            <button class="serving-button" id="servingsPlus" aria-label="Increase servings">+</button>
+                        </div>
+                    </div>
+                    <ul class="ingredients-list" id="ingredientsList"></ul>
+                </section>
+
+                <!-- Instructions -->
+                <section class="recipe-section instructions-section" aria-label="Recipe instructions">
+                    <div class="instructions-header">
+                        <h3 class="recipe-section-title">👨‍🍳 Instructions</h3>
+                        <button class="cooking-mode-toggle" id="cookingModeToggle" aria-pressed="false">
+                            <span class="toggle-icon">🔥</span>
+                            <span class="toggle-text">Cooking Mode</span>
+                        </button>
+                    </div>
+                    <ol class="instructions-list" id="instructionsList"></ol>
+                </section>
+            </div>
+
+            <footer class="recipe-footer">
+                <div class="recipe-info-grid">
+                    <div class="info-item"><span class="info-label">Prep Time</span><span class="info-value" id="recipePrepTime">–</span></div>
+                    <div class="info-item"><span class="info-label">Cook Time</span><span class="info-value" id="recipeCookTime">–</span></div>
+                    <div class="info-item"><span class="info-label">Difficulty</span><span class="info-value" id="recipeDifficulty">–</span></div>
+                    <div class="info-item"><span class="info-label">Base Servings</span><span class="info-value" id="recipeBaseServings">–</span></div>
+                </div>
+            </footer>
+        </article>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="about-section" aria-label="About section">
+        <div class="about-container">
+            <div class="about-content">
+                <span class="section-badge">Our Story</span>
+                <h2 class="about-title">Preserving Culinary Heritage</h2>
+                <p class="about-text">Kinfolk Eats is a digital compendium dedicated to preserving the authentic flavors, stories, and traditions of Pakistani cuisine. Every recipe is a window into history — from the royal kitchens of Mughal empires to humble family hearths across Punjab, Sindh, Balochistan, and KPK.</p>
+                <p class="about-text">Our mission is to ensure that the warmth of desi cooking is never lost — that the recipe your Nani whispered to your mother is passed to the next generation, intact and alive.</p>
+            </div>
+            <div class="about-features">
+                <div class="feature-card"><span class="feature-icon">📜</span><h4>Heritage First</h4><p>Every recipe is authentic, tested, and true to its origins.</p></div>
+                <div class="feature-card"><span class="feature-icon">⚖️</span><h4>Smart Scaling</h4><p>Adjust servings and ingredients scale automatically.</p></div>
+                <div class="feature-card"><span class="feature-icon">👨‍🍳</span><h4>Cooking Mode</h4><p>Interactive checklist to guide you step by step.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">🍽️ Kinfolk Eats</h3>
+                <p class="footer-description">Preserving the culinary heritage of Pakistan — one recipe at a time. Every dish tells a story of family, culture, and love passed down through generations.</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#recipes" class="footer-link">Browse Recipes</a></li>
+                    <li><a href="#about" class="footer-link">About Us</a></li>
+                    <li><a href="#contact" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="contact">
+                <h4 class="footer-heading">Share Your Recipe</h4>
+                <p class="footer-description">Have a beloved family recipe? Share your desi culinary traditions with us.</p>
+                <a href="mailto:recipes@kinfolkeats.pk" class="footer-link-email">recipes@kinfolkeats.pk</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2025 Kinfolk Eats Pakistan. Built with care by DecodeLabs Internship Program — Batch 2026.</p>
+        </div>
+    </footer>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
